@@ -44,15 +44,15 @@
 
     <ul>
         <li>
-            <h3>Borderify</h3>
-            <p>Adds a red border to the page (Example).</p>
-            <a class="bookmarklet" href="javascript:(function(){document.body.style.border=\'5px solid red\';})();">Drag to Bookmarks</a>
+            <h3>Share Page</h3>
+            <p>Copies to your clipboard a link to the current page using the page title as the text.</p>
+            <a class="bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%7Bconst title%3Ddocument.title%3Bconst url%3Dwindow.location.href%3Bconst html%3D'<a href%3D"'%2Burl%2B'">'%2Btitle%2B'<%2Fa>'%3Bnavigator.clipboard.write(%5Bnew ClipboardItem(%7B'text%2Fhtml'%3Anew Blob(%5Bhtml%5D%2C%7Btype%3A'text%2Fhtml'%7D)%2C'text%2Fplain'%3Anew Blob(%5Burl%5D%2C%7Btype%3A'text%2Fplain'%7D)%7D)%5D)%3B%7D)()%3B%7D)()%3B">Share Page</a>
         </li>
 
         <li>
-            <h3>Edit Page</h3>
-            <p>Makes any web page temporarily editable like a document.</p>
-            <a class="bookmarklet" href="javascript:void(document.body.contentEditable=\'true\');">Edit Page</a>
+            <h3>+coding</h3>
+            <p>Generates a +coding statement for the current Jira Page.<br>Includes the +review if there is a single review linked.</p>
+            <a class="bookmarklet" href="javascript:(function(){var url=window.location.href;var match=url.match(/\/browse\/([A-Za-z]+-\d+)/);if(!match){alert('Not a JIRA issue page');return;}var key=match[1].toUpperCase();var base=url.split('/browse/')[0];var summaryEl=document.getElementById('summary-val');var title=(summaryEl&&summaryEl.textContent.trim())||document.title.replace(/^\[?[A-Za-z]+-\d+\]?\s*[-\u2013\u2014]?\s*/,%27%27).replace(/\s*[-\u2013\u2014]\s*(Jira|JIRA|Atlassian).*$/i,%27%27).trim();var m1=document.querySelector(%27meta[name="ajs-issue-id"]%27);var m2=document.getElementById(%27issue%27);var m3=document.querySelector(%27[data-issue-id]%27);var issueId=(m1&&m1.getAttribute(%27content%27))||(m2&&m2.getAttribute(%27data-issue-id%27))||(m3&&m3.getAttribute(%27data-issue-id%27));function buildText(ids){var t=%27+coding %27+key+%27 %27+title;if(ids.length===1)t+=%27\n+review %27+ids[0];return t;}function syncCopy(t){var el=document.createElement(%27textarea%27);el.value=t;document.body.appendChild(el);el.select();document.execCommand(%27copy%27);document.body.removeChild(el);}if(!issueId){syncCopy(buildText([]));return;}var bp=fetch(base+%27/rest/dev-status/latest/issue/detail?issueId=%27+issueId+%27&applicationType=fecru&dataType=review%27,{credentials:%27same-origin%27}).then(function(r){return r.json();}).then(function(d){var ids=[];(d.detail||[]).forEach(function(x){(x.reviews||[]).forEach(function(r){if(r.id)ids.push(r.id.toUpperCase());});});return new Blob([buildText(ids.filter(function(v,i){return ids.indexOf(v)===i;}))],{type:%27text/plain%27});}).catch(function(){return new Blob([buildText([])],{type:%27text/plain%27});});try{navigator.clipboard.write([new ClipboardItem({%27text/plain%27:bp})]).catch(function(){bp.then(function(b){return b.text();}).then(syncCopy);});}catch(e){bp.then(function(b){return b.text();}).then(syncCopy);}})();">+coding</a>
         </li>
     </ul>
 
