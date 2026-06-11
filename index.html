@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookmarklets</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+        .bookmarklet {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007acc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: move; /* Hints to the user that it can be dragged */
+        }
+        .bookmarklet:hover {
+            background-color: #005999;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My Bookmarklets</h1>
+    <p>Drag the blue buttons directly to your bookmarks bar.</p>
+
+    <ul>
+        <li>
+            <h3>Borderify</h3>
+            <p>Adds a red border to the page (Example).</p>
+            <a class="bookmarklet" href="javascript:(function(){document.body.style.border=\'5px solid red\';})();">Drag to Bookmarks</a>
+        </li>
+
+        <li>
+            <h3>Edit Page</h3>
+            <p>Makes any web page temporarily editable like a document.</p>
+            <a class="bookmarklet" href="javascript:void(document.body.contentEditable=\'true\');">Edit Page</a>
+        </li>
+    </ul>
+
+</body>
+</html>
